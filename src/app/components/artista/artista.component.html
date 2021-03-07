@@ -1,0 +1,36 @@
+<app-loading *ngIf="loading" class="m-5"></app-loading>
+
+<div class="row" *ngIf="!loading">
+    <div class="col-4">
+        <img [src]="artista.images | noimage" class="img-fluid" alt="...">
+    </div>
+    <div class="col-8">
+        <h1 class="display-6">{{ artista.name }}</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/search">Search</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a [href]="artista.external_urls.spotify">Pag del artista</a></li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<table class="table table-borderless m-5">
+    <thead>
+        <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Album</th>
+            <th scope="col">Canción</th>
+            <th scope="col">Vista Previa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tracks of topTracks">
+            <td class="text-center"><img [src]="tracks.album.images | noimage" class="rounded-circle" alt="..." height="35px"></td>
+            <td>{{ tracks.album.name }}</td>
+            <td>{{ tracks.name }}</td>
+            <td>
+                <iframe [src]="tracks.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </td>
+        </tr>
+    </tbody>
+</table>
