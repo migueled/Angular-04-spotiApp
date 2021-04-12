@@ -4,44 +4,41 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class SpotifyService {
 
-  getQuery(query: string) {
-    const url = `https://api.spotify.com/v1/${query}`;
+    getQuery(query: string) {
+        const url = `https://api.spotify.com/v1/${ query }`;
 
-    const headers = new HttpHeaders({
-      Authorization:'Bearer A-BQATNWdAkFvfKioIuQ5MyqhcnYr_X8M6baNqDxlbOwg00nJ9-AGyQD0H9RIIg_J7LM4tjCJHiqlNwa9NQnE',
-    });
+        const headers = new HttpHeaders({
+            Authorization:'Bearer A-BQATNWdAkFvfKioIuQ5MyqhcnYr_X8M6baNqDxlbOwg00nJ9-AGyQD0H9RIIg_J7LM4tjCJHiqlNwa9NQnE',
+        });
 
-    return this.http.get(url, { headers });
-  }
+        return this.http.get(url, { headers });
+    }
 
-  constructor(private http: HttpClient) {}
+    constructor( private http : HttpClient ) {}
 
-  getNewReleases() {
-    return this.getQuery('browse/new-releases')
-    .pipe(map((data: any) => {return data.albums.items;}));
-  }
+    getNewReleases() {
+        return this.getQuery('browse/new-releases')
+            .pipe(map( ( data : any ) => { return data.albums.items; }));
+    }
 
-  getArtistas(termino: string) {   
+    getArtistas( termino : string ) {
+        return this.getQuery(`search?q=${ termino }&type=artist&limit=10`)
+            .pipe(map( ( data : any ) => data.artists.items));
+    }
 
-    return this.getQuery(`search?q=${termino}&type=artist&limit=10`)
-      .pipe(map((data: any) => data.artists.items));
-  }
+    getArtista( id : string ) {
+        return this.getQuery(`artists/${ id }`);
+    }
 
-  getArtista(id: string) {   
-
-    return this.getQuery(`artists/${id}`);
-
-  }
-  getTopTracks(id: string) {   
-
-    return this.getQuery(`artists/${id}/top-tracks/?market=us`)
-    .pipe(map((data: any) => data.tracks));
-  }
-}0
+    getTopTracks( id : string) {   
+        return this.getQuery(`artists/${ id }/top-tracks/?market=us`)
+            .pipe(map( ( data : any ) => data.tracks));
+    }
+}
 /* 
  getArtist(termino: string) {
     const headers = new HttpHeaders({

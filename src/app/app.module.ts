@@ -19,23 +19,24 @@ import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SearchComponent,
-    ArtistaComponent,
-    NavbarComponent,
-    NoimagePipe,
-    DomseguroPipe,
-    TarjetasComponent,
-    LoadingComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot( ROUTES, { useHash:true })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SearchComponent,
+        ArtistaComponent,
+        NavbarComponent,
+        NoimagePipe,
+        DomseguroPipe,
+        TarjetasComponent,
+        LoadingComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        RouterModule.forRoot( ROUTES, { useHash:true })
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
+
 export class AppModule { }
